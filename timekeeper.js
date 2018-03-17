@@ -86,7 +86,7 @@ var config = {
     var x = converted.reduce(reducer);
     //I want to find the total number of seconds spent working and convert to a percentage of 8 hours
     var hrs = x/3600;
-    var progress = (hrs/8) * 100;
+    var progress = Math.round((hrs/8) * 100);
     $('#dailyTotal').html(`You logged ${timeConverter(x)} total time today which is ${progress}% of your 8 hour goal!`);
     timeUnit["total"] = timeConverter(x);
     timekeeper.ref().push(timeUnit);    
@@ -102,8 +102,8 @@ var config = {
     console.log(snap.val());
 
     var day = snap.val().day;
-    var total = snap.val().total;
-
+    var total = timeConverter(stringToInt(snap.val().total));
+    
     $("#timeTable2 > tbody").append("<tr><td>" + day + "</td><td>" + total + "</td></tr>")
   });
 
@@ -136,9 +136,14 @@ var config = {
 //need to take an int value and convert it into proper time format
 //better add hours in as well in case I need them
   function timeConverter(t) {
+      var hours = Math.floor(t/3600);
 
-      var minutes = Math.floor(t / 60);
-      var seconds = t - (minutes * 60);
+      var minutes = Math.floor((t / 60)-(hours * 60));
+        //var minutes = Math.floor(t/60);
+      //var seconds = t - (minutes * 60);
+      var seconds = t - (hours * 3600) - (minutes * 60);
+      
+      
     
       if (seconds < 10) {
         seconds = "0" + seconds;
@@ -150,7 +155,16 @@ var config = {
       else if (minutes < 10) {
         minutes = "0" + minutes;
       }
+      //new
+      if (hours === 0){
+        hours = "00";
+      }
+      else if (minutes < 1) {
+        hours = "0" + hours;
+      }
+      console.log(hours + ":" + minutes + ":" + seconds);
     
-      return minutes + ":" + seconds;
+    
+      return hours + ":" + minutes + ":" + seconds;
     }
 
