@@ -45,6 +45,7 @@ var config = {
 
   //give the option of clearing in case you don't want to log your time
   $("#clear").click(function (){
+    clearInterval(timer);
     $("#clock").empty();
     $("#clear").hide();
     $("#log").hide();
