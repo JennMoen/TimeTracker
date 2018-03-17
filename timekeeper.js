@@ -32,7 +32,6 @@ var config = {
       counter = 0;
         $("#timerZone").show();
         $("#stop").show();
-        //$("#submit").show();
       timer = setInterval(count, 1000);
   });
       
@@ -73,7 +72,7 @@ var config = {
   //clear your time table if you need to
   $("#clearTable").on('click', function(){
     times = [];
-    $("#timeTable").empty();
+    $("#timeTable >tbody").empty();
   });
  
   //once you're done logging your various times you can push them all to the database as one entry
