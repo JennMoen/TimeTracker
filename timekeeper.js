@@ -32,7 +32,7 @@ var config = {
       counter = 0;
         $("#timerZone").show();
         $("#stop").show();
-        $("#submit").show();
+        //$("#submit").show();
       timer = setInterval(count, 1000);
   });
       
@@ -56,6 +56,7 @@ var config = {
   var times=[];
   var timeUnit={};
   $('#log').click(function(){
+    $("#submit").show();
     var time = $("#clock").html();
     times.push(time);
     var day = moment().format("dddd MMM YYYY");
@@ -67,6 +68,12 @@ var config = {
       $("#timeTable > tbody").append("<tr><td>" + day + "</td><td>" + time + "</td></tr>")
   
       return timeUnit;
+  });
+
+  //clear your time table if you need to
+  $("#clearTable").on('click', function(){
+    times = [];
+    $("#timeTable").empty();
   });
  
   //once you're done logging your various times you can push them all to the database as one entry
