@@ -59,7 +59,7 @@ $("#log").click(function() {
   $("#submit").show();
   var time = $("#clock").html();
   times.push(time);
-  var day = moment().format("dddd MMM YYYY");
+  var day = moment().format("dddd MMM DD YYYY");
   timeUnit = {
     times: times,
     day: day,
